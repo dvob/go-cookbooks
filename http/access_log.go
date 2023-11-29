@@ -14,7 +14,7 @@ func logHandler(next http.Handler, logger *slog.Logger) http.Handler {
 		next.ServeHTTP(sw, r)
 
 		logger.LogAttrs(r.Context(), slog.LevelInfo,
-			"",
+			"access_log",
 			slog.String("client", r.RemoteAddr),
 			slog.String("method", r.Method),
 			slog.String("uri", r.RequestURI),
