@@ -60,7 +60,7 @@ func run() error {
 	flag.DurationVar(&myDuration, "duration", myDuration, "description for my float")
 
 	// flags for types which implement TextMarshaler/TextUnmarshaler
-	flag.TextVar(&myLogLevel, "log-level", &myLogLevel, "description for my log level")
+	flag.TextVar(&myLogLevel, "log-level", &myLogLevel, "log level (DEBUG, INFO, WARN, ERROR)")
 	flag.TextVar(&myTime, "time", &myTime, "description for my time")
 	flag.TextVar(myRegex, "regex", myRegex, "description for my regex")
 	flag.TextVar(&myIpPrefix, "ip-prefix", &myIpPrefix, "description for my ip prefix")
