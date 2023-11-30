@@ -51,6 +51,9 @@ func run(ctx context.Context) error {
 	flag.StringVar(&tlsCert, "tls-cert", tlsCert, "tls certificate file")
 	flag.StringVar(&tlsKey, "tls-key", tlsKey, "tls key file")
 	flag.DurationVar(&shutdownGracePeriod, "shutdown-grace-period", shutdownGracePeriod, "shutdown grace period")
+	flag.DurationVar(&server.WriteTimeout, "write-timeout", server.WriteTimeout, "server write timeout")
+	flag.DurationVar(&server.ReadTimeout, "read-timeout", server.ReadTimeout, "server read timeout")
+	flag.DurationVar(&server.IdleTimeout, "idle-timeout", server.IdleTimeout, "server idle timeout")
 
 	err := readFlagsFromEnv(flag.CommandLine, envPrefix)
 	if err != nil {
@@ -176,5 +179,6 @@ func exampleAppHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Fprintln(w, "ok")
+	n, err := fmt.Fprintln(w, "ok")
+	slog.InfoContext(r.Context(), "outcome of write ok", "bytes", n, "err", err)
 }
